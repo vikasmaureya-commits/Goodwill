@@ -400,15 +400,15 @@
   document.querySelectorAll('[data-reorder]').forEach(b=>b.onclick=()=>reorder(b.dataset.reorder));
   /* Bestellverlauf: Suche */
   const ORDERS = [
-    {who:'Daniel', t:['Zugestellt in 15 Minuten','Arrived in 15 minutes'], de:'Sa., 18. Okt., 15:43', en:'Sat, 18 Oct, 3:43 pm', items:['milch','brot','aepfel']},
-    {who:'Sophia', de:'Mo., 13. Okt., 10:12', en:'Mon, 13 Oct, 10:12 am', items:['butter','kaffee']},
-    {who:'Thomas', de:'Di., 7. Okt., 09:30', en:'Tue, 7 Oct, 9:30 am', items:['schmerz','pflaster']},
-    {who:'Daniel', de:'Fr., 3. Okt., 17:05', en:'Fri, 3 Oct, 5:05 pm', items:['eier','kartoffeln','gemuese']},
-    {who:'Sophia', de:'Fr., 26. Sep., 11:20', en:'Fri, 26 Sep, 11:20 am', items:['milch','brot','aepfel','eier','butter','kaffee','joghurt']}
+    {who:'Daniel', t:['Zugestellt in 15 Minuten','Arrived in 15 minutes'], m:['Oktober','October'], de:'Sa., 18. Okt., 15:43', en:'Sat, 18 Oct, 3:43 pm', items:['milch','brot','aepfel']},
+    {who:'Sophia', m:['Oktober','October'], de:'Mo., 13. Okt., 10:12', en:'Mon, 13 Oct, 10:12 am', items:['butter','kaffee']},
+    {who:'Thomas', m:['Oktober','October'], de:'Di., 7. Okt., 09:30', en:'Tue, 7 Oct, 9:30 am', items:['schmerz','pflaster']},
+    {who:'Daniel', m:['Oktober','October'], de:'Fr., 3. Okt., 17:05', en:'Fri, 3 Oct, 5:05 pm', items:['eier','kartoffeln','gemuese']},
+    {who:'Sophia', m:['September','September'], de:'Fr., 26. Sep., 11:20', en:'Fri, 26 Sep, 11:20 am', items:['milch','brot','aepfel','eier','butter','kaffee','joghurt']}
   ];
   const CHECK='<svg viewBox="0 0 24 24"><path d="M4.5 12.8l5 5L19.5 7"/></svg>', DOTS='<svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg>';
   function renderOrders(){
-    const q = ($('oq').value||'').trim().toLowerCase(); let n=0;
+    const q = ($('oq').value||'').trim().toLowerCase(); let n=0, month='';
     $('ohist').innerHTML = ORDERS.map(o=>{
       const names=o.items.map(id=>iName(ITEM_BY_ID[id]));
       const date=LANG==='en'?o.en:o.de;
@@ -416,7 +416,8 @@
       n++;
       const many=o.items.length>5, show=many?o.items.slice(0,4):o.items;
       const th=show.map(id=>`<span class="th" title="${esc(iName(ITEM_BY_ID[id]))}">${emo(id)}</span>`).join('')+(many?`<span class="th more">+${o.items.length-4}</span>`:'');
-      return `<article class="oh"><div class="oh-top"><span class="okbox">${CHECK}</span><div class="oh-t"><b>${o.t?o.t[LANG==='en'?1:0]:L('Bestellung zugestellt','Order arrived')}</b><span>${L('Von ','By ')+o.who} • ${date}</span></div><button class="kebab" type="button" data-soon2 aria-label="${L('Mehr','More')}">${DOTS}</button></div><div class="oh-th">${th}</div><div class="oh-ft"><button type="button" data-re="${o.items.join(',')}">${L('Nochmal bestellen','Reorder')}</button><button type="button" data-soon2>${L('Bewerten','Rate order')}</button></div></article>`;
+      const head = o.m[0]!==month ? (month=o.m[0], `<h3 class="gl2">${o.m[LANG==='en'?1:0]}</h3>`) : ''; // Monatsüberschrift, wenn der Monat wechselt
+      return head+`<article class="oh"><div class="oh-top"><span class="okbox">${CHECK}</span><div class="oh-t"><b>${esc(names.slice(0,3).join(', ')+(names.length>3?' +'+(names.length-3):''))}</b><span>${L('Von ','By ')+o.who} · ${date}${o.t?' · '+o.t[LANG==='en'?1:0]:''}</span></div><button class="kebab" type="button" data-soon2 aria-label="${L('Mehr','More')}">${DOTS}</button></div><div class="oh-th">${th}</div><div class="oh-ft"><button type="button" data-re="${o.items.join(',')}">${L('Nochmal bestellen','Reorder')}</button><button type="button" data-soon2>${L('Bewerten','Rate order')}</button></div></article>`;
     }).join('');
     $('oNone').classList.toggle('hidden', n>0);
   }

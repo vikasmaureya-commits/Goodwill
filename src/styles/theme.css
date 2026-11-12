@@ -183,3 +183,33 @@ body:not(.role-helper):not(.role-guardian) #s-home .herophoto{margin-top:calc(12
   #s-home .tiles .tile .ic{width:34px !important;height:34px !important;}
   #s-home .tiles .tile .ic svg{width:34px !important;height:34px !important;}
 }
+/* v13 – Anfragen + Bestellverlauf im App-Stil: gleiche Ränder, flache graue Karten, Mint-Symbole, Dunkelgrün statt Blaugrün,
+   Pillen-Filter; Bestellungen kompakter und nach Monat gegliedert. Rueckgaengig: diesen Abschnitt loeschen. */
+#s-orders{padding-left:20px;padding-right:20px;}
+.seg2 button{height:38px;background:var(--wz-card) !important;border:none !important;border-radius:999px !important;color:var(--ink);}
+.seg2 button.on{background:#163300 !important;color:#fff !important;}
+.rq-i,.rq-i.alt,.rq-i.new{background:var(--matte-mint) !important;}
+.rq-i svg,.rq-i.alt svg,.rq-i.new svg{stroke:#163300;}
+.rq-st{background:var(--matte-mint);color:#163300;border-radius:999px !important;}
+.rq-st.sent{background:var(--wz-lime) !important;color:#163300 !important;}
+.pulse{background:#163300;}
+.rq-bar i,.rq-bar i.now{background:var(--hair);} .rq-bar i.on,.rq-bar i.now::after{background:#163300;}
+.rq-a{height:34px;color:#163300;border-color:#163300;background:transparent;}
+#s-orders .psearch{height:52px;margin-bottom:6px;} #s-orders .psearch svg{stroke:var(--ink);stroke-width:1.8;}
+#s-orders .psearch input::placeholder{color:var(--mute);}
+#ohist .gl2{margin-top:16px;}
+#s-orders .oh{margin-bottom:10px;border-radius:20px;}
+#s-orders .oh-top{padding:12px 6px 12px 14px;}
+#s-orders .okbox{width:40px;height:40px;background:var(--matte-mint);}
+#s-orders .okbox svg{width:22px;height:22px;stroke:#163300;stroke-width:2.2;}
+#s-orders .oh-t b{font-weight:600;color:var(--ink);} #s-orders .oh-t span{color:var(--mute);}
+#s-orders .kebab svg{width:22px;height:22px;fill:var(--mute);}
+#s-orders .oh-th{gap:8px;padding:10px 14px;border-color:var(--hair);}
+#s-orders .oh-th .th{width:48px;height:48px;font-size:1.9rem;background:#fff;border:none;}
+#s-orders .oh-ft button{height:44px;color:#163300;} #s-orders .oh-ft button:first-child{font-weight:700;}
+#s-orders .oh-ft button+button{border-left-color:var(--hair);}
+/* v14 – Logo oben links auf der Startseite: zwei weiße Blätter (wie im Goodwill-Logo) auf hellgrünem Kreis */
+.hlogo{flex:none;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--wz-lime);}
+.hlogo svg{width:40px;height:40px;fill:#fff;}
+#s-home .haddr>svg:first-child{display:none;} /* Pin weicht dem Logo, sonst wird die Adresse auf schmalen Handys abgeschnitten */
+.hlogo svg .v{fill:var(--wz-lime);} /* Blattadern: laufen wie im Original-Logo unten in einem Punkt zusammen */
