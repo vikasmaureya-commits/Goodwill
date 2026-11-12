@@ -2,7 +2,7 @@
 <html lang="de" class="lock">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; media-src 'self' blob:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#EDF3EF">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="src/notifications/notifications.css">
 <link rel="stylesheet" href="src/profile/roles.css">
 <link rel="stylesheet" href="src/profile/onboarding.css">
+<link rel="stylesheet" href="src/view/reels.css">
 <link rel="stylesheet" href="src/styles/theme.css">
 </head>
 <body class="lock">
@@ -26,7 +27,10 @@
     <button class="haddr" type="button" id="homeAddr"><svg viewBox="0 0 24 24"><path d="M12 21s7-6 7-11a7 7 0 0 0-14 0c0 5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><span><small>Hilfe kommt zu</small><b data-dyn>Zuhause · Otto-von-Guericke-Straße</b></span><svg class="r" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
     <div class="hbtns"><button class="bell" type="button" data-lang aria-label="Sprache ändern"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17"/><path d="M12 3.5c3 3 3 14 0 17M12 3.5c-3 3-3 14 0 17"/></svg></button><button class="bell" id="bellBtn" type="button" aria-label="Benachrichtigungen"><svg viewBox="0 0 24 24"><path d="M6 17V11a6 6 0 0 1 12 0v6l1.5 2h-15L6 17z"/><path d="M10 21a2 2 0 0 0 4 0"/></svg></button></div>
   </header>
-  <button class="hsearch rcv" type="button" id="homeSearch"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>Was brauchen Sie heute?</button>
+  <div class="hsrow rcv">
+    <button class="hsearch" type="button" id="homeSearch"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>Was brauchen Sie heute?</button>
+    <button class="hvoice" type="button" id="homeVoice" aria-label="Bestellung sprechen"><svg viewBox="0 0 24 24"><path d="M5 9.5v5M8.5 6v12M12 5v14M15.5 6v12M19 8v8"/></svg></button>
+  </div>
   <div class="hcats rcv" id="homeCats" data-dyn></div>
   <div class="herophoto" id="hero" role="img" aria-label="Menschen jeden Alters helfen sich in der Nachbarschaft">
     <div class="slide on" data-k="HERO4"></div><div class="slide" data-k="HERO1"></div><div class="slide" data-k="HERO5"></div><div class="slide" data-k="HERO2"></div><div class="slide" data-k="HERO6"></div><div class="slide" data-k="HERO3"></div>
@@ -34,14 +38,41 @@
     <div class="hcap"><h1 class="display">Gemeinsam für ein besseres Morgen.</h1>
     <p class="lead">Alltagshilfe von Menschen aus Ihrer Nachbarschaft – kostenlos.</p></div>
   </div>
-  <div class="rcv"><h3 class="gl2">Aktuell</h3>
-    <button class="rq live" type="button" data-go="helpers">
-      <span class="rq-i"><svg viewBox="0 0 24 24"><path d="M5.2 8.5h13.6l-1.1 10.6a1.6 1.6 0 0 1-1.6 1.4H7.9a1.6 1.6 0 0 1-1.6-1.4L5.2 8.5z"/><path d="M8.8 8.5V7a3.2 3.2 0 0 1 6.4 0v1.5"/></svg></span>
-      <span class="rq-t"><b>Milch, Brot, Käse</b><small>Daniel bringt Ihre Artikel</small></span>
-      <span class="rq-st"><i class="pulse"></i>Unterwegs</span>
-      <span class="rq-bar" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="now"></i><i></i></span>
-    </button>
-  </div>
+  <button class="hpromo rcv" type="button" id="homePromo">
+    <svg class="hp-art" viewBox="0 0 112 48" aria-hidden="true">
+      <ellipse class="hp-m" cx="56" cy="43.5" rx="54" ry="3"/>
+      <!-- fünf Szenen, wechseln per CSS alle 3,5 s (hp-cycle): Hund ausführen, Seniorin begleiten, Einkauf bringen, Pflanze gießen, Rollstuhl schieben -->
+      <g class="hp-sc">
+        <g class="hp-bob"><circle class="hp-d" cx="40" cy="12" r="4"/><path class="hp-ds" d="M40 17v13M40 20l7 6"/><path class="hp-ds hp-leg" d="M40 30v12"/><path class="hp-ds hp-leg hp-rev" d="M40 30v12"/></g>
+        <path class="hp-thin" d="M47 26l11 6"/>
+        <g class="hp-bob hp-late"><rect class="hp-l" x="58" y="31" width="13" height="6" rx="3"/><circle class="hp-l" cx="72.5" cy="30" r="3.2"/><path class="hp-ls" d="M61 37v5M68 37v5"/><path class="hp-ls hp-tail" d="M58.5 32.5l-3-4"/></g>
+      </g>
+      <g class="hp-sc">
+        <g class="hp-bob hp-slow"><circle class="hp-d" cx="47" cy="12" r="4"/><path class="hp-ds" d="M47 17v13M47 20l9 4"/><path class="hp-ds hp-leg hp-slow" d="M47 30v12"/><path class="hp-ds hp-leg hp-slow hp-rev" d="M47 30v12"/></g>
+        <g class="hp-bob hp-slow hp-late"><circle class="hp-l" cx="61" cy="15" r="3.8"/><path class="hp-ls hp-thick" d="M61 20q-2 5 0 10M61 23l6 2"/><path class="hp-ls hp-thick hp-leg hp-slow" d="M61 30v12"/><path class="hp-ls hp-thick hp-leg hp-slow hp-rev" d="M61 30v12"/><path class="hp-thin" d="M67.5 24.5v17.5"/></g>
+      </g>
+      <g class="hp-sc">
+        <rect class="hp-m" x="68" y="13" width="17" height="30" rx="2"/><circle class="hp-d" cx="72" cy="29" r="1.2"/>
+        <g class="hp-bob"><circle class="hp-d" cx="42" cy="12" r="4"/><path class="hp-ds" d="M42 17v13M42 20l7 5"/><path class="hp-ds hp-leg" d="M42 30v12"/><path class="hp-ds hp-leg hp-rev" d="M42 30v12"/><rect class="hp-l" x="45.5" y="26" width="9" height="10" rx="1.5"/><path class="hp-thin" d="M47.5 26q2.5-4.5 5 0"/></g>
+      </g>
+      <g class="hp-sc">
+        <circle class="hp-d" cx="42" cy="12" r="4"/><path class="hp-ds" d="M42 17v13M42 20l8 3M42 30l-3 12M42 30l3 12"/>
+        <rect class="hp-l" x="50" y="20.5" width="8" height="6" rx="1.5"/><path class="hp-ls" d="M58 23l5-2"/>
+        <circle class="hp-l hp-drop" cx="64" cy="23" r="1"/><circle class="hp-l hp-drop hp-late" cx="66" cy="24" r="1"/>
+        <g class="hp-grow"><path class="hp-ls" d="M68 43v-10"/><ellipse class="hp-l" cx="64.5" cy="35" rx="3.6" ry="2" transform="rotate(25 64.5 35)"/><ellipse class="hp-l" cx="71.5" cy="33" rx="3.6" ry="2" transform="rotate(-25 71.5 33)"/></g>
+      </g>
+      <g class="hp-sc">
+        <g class="hp-bob"><circle class="hp-d" cx="38" cy="12" r="4"/><path class="hp-ds" d="M38 17v13M38 20l9 4"/><path class="hp-ds hp-leg" d="M38 30v12"/><path class="hp-ds hp-leg hp-rev" d="M38 30v12"/></g>
+        <circle class="hp-l" cx="54" cy="19" r="3.8"/><path class="hp-ls hp-thick" d="M54 24v9h8v6"/>
+        <path class="hp-thin" d="M47 24v10h13"/><circle class="hp-thin" cx="63" cy="41" r="1.8"/>
+        <g class="hp-spin"><circle class="hp-thin" cx="51" cy="38" r="5"/><path class="hp-thin" d="M46 38h10M51 33v10"/></g>
+      </g>
+      <!-- Herz rechts neben den Figuren; muss NACH den Szenen stehen, weil theme.css die Szenen per g:nth-of-type(1–5) taktet -->
+      <g transform="translate(24 3)"><path class="hp-heart" d="M60 12.5s-4-2.4-4-5.2a2.2 2.2 0 0 1 4-1.3 2.2 2.2 0 0 1 4 1.3c0 2.8-4 5.2-4 5.2z"/></g>
+    </svg>
+    <span class="hp-t"><b>Teilen Sie Ihre Geschichte</b><small>Ideen und gute Taten als Video – jetzt ansehen</small></span>
+    <span class="hp-go"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span>
+  </button>
   <div class="tiles">
     <button class="tile mint" id="tileOnce" type="button">
       <div class="ic"><svg viewBox="0 0 24 24"><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/></svg></div>
@@ -124,6 +155,14 @@
     <button type="button" class="arow" data-soon><span class="ci"><svg viewBox="0 0 24 24"><path d="M5 7h14M9 7V5h6v2M7 7l1 13h8l1-13"/></svg></span><span class="tx">Konto löschen</span><svg class="r" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
   </div>
   <button class="logout glass" type="button" data-soon>Abmelden</button>
+</section>
+
+<!-- Ansicht: Videos zum Durchwischen (src/view/reels.js füllt #reels) -->
+<section id="s-view" class="screen hidden">
+  <div class="reels" id="reels"></div>
+  <button class="rl-sound" id="reelSound" type="button" aria-label="Ton" aria-pressed="false"><svg viewBox="0 0 24 24"><path d="M4 9.5v5h3.5L12 18V6L7.5 9.5H4z"/><path class="w" d="M15.5 9a4.2 4.2 0 0 1 0 6M18 6.5a8 8 0 0 1 0 11"/><path class="x" d="M15.5 9.5l5 5M20.5 9.5l-5 5"/></svg></button>
+  <button class="rl-post" id="reelPost" type="button"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Video posten</button>
+  <input id="reelFile" type="file" accept="video/*" hidden>
 </section>
 
 <!-- 2 · Anfrage erstellen -->
@@ -239,6 +278,7 @@
     <button class="tab on" type="button" data-tab="home"><svg viewBox="0 0 24 24"><path d="M4 11.5L12 5l8 6.5"/><path d="M6 10.5V19h12v-8.5"/><path d="M10 19v-5h4v5"/></svg>Start</button>
     <button class="tab" type="button" data-tab="req"><svg viewBox="0 0 24 24"><rect x="5" y="6" width="14" height="14" rx="3"/><path d="M9 6V4.8h6V6"/><path d="M9 13l2 2 4-4"/></svg>Anfragen</button>
     <button class="tab" type="button" data-tab="orders"><svg viewBox="0 0 24 24"><path class="bag" d="M5.2 8.5h13.6l-1.1 10.6a1.6 1.6 0 0 1-1.6 1.4H7.9a1.6 1.6 0 0 1-1.6-1.4L5.2 8.5z"/><path d="M8.8 8.5V7a3.2 3.2 0 0 1 6.4 0v1.5"/><path class="hrt" d="M12 17.6s-3-1.8-3-3.9a1.7 1.7 0 0 1 3-1.1 1.7 1.7 0 0 1 3 1.1c0 2.1-3 3.9-3 3.9z"/></svg>Bestellungen</button>
+    <button class="tab" type="button" data-tab="view"><svg viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></svg>Ansicht</button>
     <button class="tab" type="button" data-tab="me"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c.7-3.7 3.4-5.6 7-5.6s6.3 1.9 7 5.6"/></svg>Profil</button>
   </nav>
 
@@ -266,6 +306,7 @@
 <script id="logic" src="src/core/catalog.js"></script>
 
 <!-- ============ OBERFLÄCHE ============ -->
+<script src="src/view/reels.js"></script><!-- vor app.js: dessen erster Sprachlauf übersetzt die Karten mit -->
 <script src="src/core/app.js"></script>
 <div class="scrim hidden" id="hscrim"></div>
 <div class="sheet hsx hidden" id="hsheet" role="dialog" aria-modal="true" data-dyn></div>

@@ -165,11 +165,25 @@
       homeLead.textContent = L('Behalten Sie die Einkäufe Ihrer Angehörigen im Blick.','Keep an eye on your relative’s shopping.');
       host.innerHTML = guardianHome();
     } else {
-      homeTitle.innerHTML = L('Gemeinsam für ein besseres Morgen.','Together for a better tomorrow.');
-      homeLead.textContent = L('Alltagshilfe von Menschen aus Ihrer Nachbarschaft – kostenlos.','Everyday help from people in your neighbourhood – free of charge.');
+      heroCap();
       host.innerHTML = '';
     }
   }
+  /* Text je Bild im Start-Banner, gleiche Reihenfolge wie die .slide-Elemente in index.html: [Titel de, en, Zeile de, en] */
+  const HERO_CAPS = [
+    ['Gemeinsam für ein besseres Morgen.','Together for a better tomorrow.','Alltagshilfe von Menschen aus Ihrer Nachbarschaft – kostenlos.','Everyday help from people in your neighbourhood – free of charge.'],
+    ['Ihr Einkauf, bis an die Tür.','Your shopping, right to your door.','Ein Nachbar bringt, was Sie brauchen.','A neighbour brings what you need.'],
+    ['Jung und Alt, Tür an Tür.','Young and old, door to door.','Hier hilft die ganze Nachbarschaft mit.','The whole neighbourhood lends a hand.'],
+    ['Bleiben Sie ruhig sitzen.','Stay comfortably seated.','Der Einkauf kommt zu Ihnen nach Hause.','Your shopping comes to your home.'],
+    ['Gemeinsam trägt es sich leichter.','Lighter when carried together.','Kleine Hilfe, große Freude – für alle.','A little help, a lot of joy – for everyone.'],
+    ['Ein freundliches Gesicht an der Tür.','A friendly face at the door.','Hilfe von Menschen, die gleich nebenan wohnen.','Help from people who live right next door.']
+  ];
+  function heroCap(){
+    if(R.role === 'help' || R.role === 'guard') return; // diese Rollen haben ihren eigenen festen Text
+    const c = HERO_CAPS[[...document.querySelectorAll('#hero .slide')].findIndex(s => s.classList.contains('on'))] || HERO_CAPS[0];
+    homeTitle.textContent = L(c[0], c[1]); homeLead.textContent = L(c[2], c[3]);
+  }
+  window.GWHeroCap = heroCap;
 
   host.onclick = e => {
     const b = e.target.closest('[data-r]'); if(!b) return;

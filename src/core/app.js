@@ -8,7 +8,7 @@
   document.querySelectorAll('img.logo-full').forEach(i=>i.src=GW.LOGO); document.querySelectorAll('img.logo-leaf').forEach(i=>i.src=GW.LEAF);
   const slides=[...document.querySelectorAll('#hero .slide')], dots=[...document.querySelectorAll('#hero .dots i')]; let cur=0;
   slides.forEach(s=>s.style.backgroundImage=`url(${GW[s.dataset.k]})`);
-  const showSlide=n=>{ cur=(n+slides.length)%slides.length; slides.forEach((s,i)=>s.classList.toggle('on',i===cur)); dots.forEach((d,i)=>d.classList.toggle('on',i===cur)); };
+  const showSlide=n=>{ cur=(n+slides.length)%slides.length; slides.forEach((s,i)=>s.classList.toggle('on',i===cur)); dots.forEach((d,i)=>d.classList.toggle('on',i===cur)); if(window.GWHeroCap) GWHeroCap(); };
   dots.forEach((d,i)=>d.onclick=()=>showSlide(i));
   setInterval(()=>{ if(!document.hidden && !$('s-home').classList.contains('hidden')) showSlide(cur+1); }, 4500);
   ['A1','A2','A3'].forEach((k,i) => { $('mapA'+(i+1)).src = GW[k]; $('listA'+(i+1)).src = GW[k]; });
@@ -133,8 +133,8 @@
   }
 
   /* ---------- Navigation ---------- */
-  const SCREENS = {home:'s-home', req:'s-req', orders:'s-orders', me:'s-me', create:'s-create', sent:'s-sent', helpers:'s-helpers', review:'s-review', policies:'s-policies'};
-  const TABSCR = ['home','req','orders','me'];
+  const SCREENS = {home:'s-home', req:'s-req', orders:'s-orders', me:'s-me', view:'s-view', create:'s-create', sent:'s-sent', helpers:'s-helpers', review:'s-review', policies:'s-policies'};
+  const TABSCR = ['home','req','orders','view','me'];
   function show(name, push=true){
     Object.entries(SCREENS).forEach(([k,id]) => $(id).classList.toggle('hidden', k!==name));
     if(push && state.nav[state.nav.length-1]!==name) state.nav.push(name);
@@ -364,6 +364,8 @@
   $('tileOnce').onclick = ()=>startRequest(null);
   /* Startseite im Liefer-App-Aufbau: Adresse, Suche, Kategorien */
   $('homeSearch').onclick = ()=>{ startRequest(null); $('q').focus(); };
+  $('homeVoice').onclick = ()=>{ startRequest(null); $('micBtn').click(); };
+  $('homePromo').onclick = ()=>document.querySelector('.tab[data-tab="view"]').click();
   window.renderHomeCats = ()=>{ $('homeCats').innerHTML = [['food',L('Essen & Trinken','Food & drink')],['med',L('Medizin','Health')],['home',L('Haushalt','Home')],['other',L('Weiteres','More')]]
     .map(([c,t])=>`<button type="button" data-hcat="${c}"><span class="hc-i t-${c}">${CATEMO[c]}</span>${t}</button>`).join(''); };
   renderHomeCats();

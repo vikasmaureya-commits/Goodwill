@@ -92,7 +92,17 @@ function enTokens(tokens){
 /* Übersetzungen für die feste Oberfläche (Deutsch -> Englisch) */
 const DICT = {
  /* Start */
- 'Gemeinsam für ein besseres Morgen.':'Together for a better tomorrow.',
+ 'Gemeinsam für ein besseres Morgen.':'Together for a better tomorrow.','Ansicht':'View','Teilen Sie Ihre Geschichte':'Share your story','Ideen und gute Taten als Video – jetzt ansehen':'Ideas and acts of kindness on video – watch now',
+ 'Gefällt mir':'Like','Teilen':'Share','Abonnieren':'Subscribe','Video posten':'Post a video','Ton':'Sound','Ihr Video':'Your video','Gerade von Ihnen gepostet.':'Just posted by you.',
+ 'Hilfe im Alltag':'Everyday help','Tierschutz':'Animal welfare','Umwelt':'Environment','Ehrenamt':'Volunteering','Hilfe gesucht':'Help wanted','Rettung':'Rescue',
+ 'Ein Stück Weg gemeinsam – Hilfe, die ankommt.':'Part of the way together – help that arrives.',
+ 'Dieser Hund braucht ein Zuhause. Tierheime in Ihrer Nähe helfen.':'This dog needs a home. Shelters near you can help.',
+ 'Freiwillige räumen das Flussufer auf – jede Hand zählt.':'Volunteers clean up the riverbank – every hand counts.',
+ 'Ein Brot, ein Lächeln – so einfach kann Helfen sein.':'A loaf of bread, a smile – helping can be that simple.',
+ 'Manchmal fällt es schwer, um Hilfe zu bitten. Schauen Sie hin.':'Sometimes it is hard to ask for help. Take notice.',
+ 'Einsatzkräfte helfen, wenn jede Minute zählt.':'Emergency crews help when every minute counts.',
+ 'Im Tierheim warten viele Tiere auf einen Menschen wie Sie.':'Many shelter animals are waiting for someone like you.',
+ 'Ein sauberer Strand beginnt mit einem einzigen Müllsack.':'A clean beach starts with a single rubbish bag.',
  'Alltagshilfe von Menschen aus Ihrer Nachbarschaft – kostenlos.':'Everyday help from people in your neighbourhood – free of charge.',
  'Einmalige Hilfe':'One-time help','Schnelle Anfrage für das, was Sie brauchen':'A quick request for what you need',
  'Regelmäßige Unterstützung':'Regular support','Wiederkehrende Hilfe einrichten':'Set up recurring help',

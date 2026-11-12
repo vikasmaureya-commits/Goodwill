@@ -13,10 +13,10 @@ const PAGE = path.join(ROOT, 'index.html');
 const LOG = path.join(__dirname, 'events.jsonl');
 const TRACKER = fs.readFileSync(path.join(__dirname, 'tracker.js'), 'utf8');
 const MAX_LINES = 500;
-const TYPES = { '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.png': 'image/png', '.jpg': 'image/jpeg' };
+const TYPES = { '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.png': 'image/png', '.jpg': 'image/jpeg', '.mp4': 'video/mp4' };
 // Same policy as the <meta> tag in index.html, sent as a real header too.
 const HEADERS = {
-  'Content-Security-Policy': "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'",
+  'Content-Security-Policy': "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; media-src 'self' blob:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'",
   'X-Content-Type-Options': 'nosniff',
   'Referrer-Policy': 'no-referrer',
   'Cache-Control': 'no-store',
@@ -77,6 +77,15 @@ http.createServer((req, res) => {
   const type = TYPES[path.extname(file)];
   const inside = [path.join(ROOT, 'src'), path.join(ROOT, 'assets')].some(d => file.startsWith(d + path.sep));
   if (req.method === 'GET' && type && inside && fs.existsSync(file) && fs.statSync(file).isFile()) {
+    // Range requests: browsers need them to seek and loop video.
+    const size = fs.statSync(file).size, m = /^bytes=(\d+)-(\d*)$/.exec(req.headers.range || '');
+    if (m) {
+      const start = +m[1], end = m[2] ? Math.min(+m[2], size - 1) : size - 1;
+      if (start > end) { res.writeHead(416, { ...HEADERS, 'Content-Range': `bytes */${size}` }).end(); return; }
+      res.writeHead(206, { ...HEADERS, 'Content-Type': type, 'Accept-Ranges': 'bytes', 'Content-Range': `bytes ${start}-${end}/${size}`, 'Content-Length': end - start + 1 });
+      fs.createReadStream(file, { start, end }).pipe(res);
+      return;
+    }
     res.writeHead(200, { ...HEADERS, 'Content-Type': type }).end(fs.readFileSync(file));
     return;
   }

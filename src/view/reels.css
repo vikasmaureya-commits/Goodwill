@@ -1,0 +1,24 @@
+/* Ansicht: Vollbild-Videos zum Durchwischen. Die Tableiste schwebt darüber. */
+#s-view{position:relative;padding:0 !important;height:100dvh;min-height:0;overflow:hidden;background:#000;}
+.reels{height:100%;overflow-y:auto;scroll-snap-type:y mandatory;overscroll-behavior:contain;scrollbar-width:none;}
+.reels::-webkit-scrollbar{display:none;}
+.reel{position:relative;height:100%;scroll-snap-align:start;scroll-snap-stop:always;}
+.reel video{display:block;width:100%;height:100%;object-fit:cover;background:#000;}
+/* dunkler Verlauf unten, damit weißer Text auf jedem Video lesbar ist */
+.reel::after{content:"";position:absolute;left:0;right:0;bottom:0;height:50%;background:linear-gradient(to top,rgba(0,0,0,.7),rgba(0,0,0,0));pointer-events:none;}
+.rl-cap,.rl-acts{position:absolute;z-index:1;bottom:calc(152px + env(safe-area-inset-bottom));}
+.rl-cap{left:16px;right:88px;color:#fff;}
+.rl-cap b{display:block;font-size:1rem;font-weight:700;}
+.rl-cap p{margin-top:2px;font-size:.9rem;line-height:1.3;}
+.rl-acts{right:8px;display:flex;flex-direction:column;gap:14px;}
+.rl-acts button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-width:60px;min-height:52px;color:#fff;font-size:.68rem;font-weight:600;}
+.rl-acts svg{width:30px;height:30px;stroke:#fff;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+.rl-acts button.on{color:var(--wz-lime);}
+.rl-acts button.on svg{stroke:var(--wz-lime);}
+.rl-acts button[data-a="like"].on svg{fill:var(--wz-lime);}
+.rl-acts button:active svg{transform:scale(.9);}
+.rl-post{position:absolute;z-index:2;left:16px;bottom:calc(92px + env(safe-area-inset-bottom));display:flex;align-items:center;gap:8px;min-height:48px;padding:0 18px;border-radius:999px;background:var(--wz-lime);color:#163300;font-size:.95rem;font-weight:600;}
+.rl-post svg{width:20px;height:20px;stroke:#163300;fill:none;stroke-width:2.2;stroke-linecap:round;}
+.rl-sound{position:absolute;z-index:2;right:12px;top:max(14px,env(safe-area-inset-top));display:grid;place-items:center;width:48px;height:48px;border-radius:50%;background:rgba(0,0,0,.45);}
+.rl-sound svg{width:24px;height:24px;stroke:#fff;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+.rl-sound .w,.rl-sound.on .x{display:none;} .rl-sound.on .w{display:inline;}
