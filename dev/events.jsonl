@@ -1,0 +1,16 @@
+{"t":1794443254641,"kind":"reload","text":"index.html changed, browser reloaded"}
+{"t":1794443270838,"kind":"reload","text":"index.html changed, browser reloaded"}
+{"t":1794443292130,"kind":"load","text":"app opened (496x776)"}
+{"t":1794443292136,"kind":"screen","text":"home"}
+{"t":1794443318876,"kind":"load","text":"app opened (754x487)"}
+{"t":1794443318882,"kind":"screen","text":"home"}
+{"t":1794443408755,"kind":"load","text":"app opened (1920x869)"}
+{"t":1794443408759,"kind":"screen","text":"home"}
+{"t":1794443413902,"kind":"tap","text":"Requests","where":".tab","screen":"home"}
+{"t":1794443413912,"kind":"screen","text":"req"}
+{"t":1794443415288,"kind":"tap","text":"Orders","where":".tab","screen":"req"}
+{"t":1794443415294,"kind":"screen","text":"orders"}
+{"t":1794443416934,"kind":"tap","text":"Profile","where":".tab","screen":"orders"}
+{"t":1794443416945,"kind":"screen","text":"me"}
+{"t":1794443418404,"kind":"tap","text":"Home","where":".tab","screen":"me"}
+{"t":1794443418412,"kind":"screen","text":"home"}

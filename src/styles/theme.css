@@ -1,0 +1,135 @@
+/* =====================================================================
+   v5 – "matt": keine Glanzlichter, kein Milchglas, keine Verläufe.
+   Flache, einfarbige Flächen mit weichem Schatten. Rückgängig: diesen Block löschen.
+   ===================================================================== */
+:root{--matte-bg:#E9F2EB; --matte-green:#1B6B4E; --matte-mint:#E3F1E7;}
+*,*::before,*::after{-webkit-backdrop-filter:none !important;backdrop-filter:none !important;text-shadow:none !important;}
+.scrim{background:rgba(30,45,38,.45) !important;}
+html,body{background:var(--matte-bg) !important;}
+#onboard .ob{background:none !important;}
+/* Glanz-Overlays weg */
+.glass::before,.tile::before,.tile.peach::before,.cg .cb::before,.banner .bart{display:none !important;}
+/* Akzentflächen: einfarbig statt Verlauf */
+.btn,.hb.primary,.chatform button,.addform button,.mic,.mic.listening,.mint .go,.tile.mint .go,.seg button.on,.seg2 button.on,
+.sw.on,.bub.u,.ini,.me .avatar,.hcardx .iconbtn,.home-pin,.relchips button.on,.daychips button.on,.rh-prog i,.hbar i{
+  background:var(--matte-green) !important;}
+.hbar.lv-mid i{background:#A8B83A !important;} .hbar.lv-low i{background:#C2493A !important;}
+.tile.peach,.cr{background:#1A6A4E !important;}
+.peach .go,.tile.peach .go{background:#fff !important;}
+/* Helle Flächen: einfarbig */
+.tile.mint{background:#F4FAF5 !important;}
+.chip .box,.stepper,.opt,.ci,.rail,.oh,.rq,.hsheet{background:#fff !important;}
+.chip.on .box,.item.sel,.pcard.sel,.rail .ctab.on,.step.done .dot,.cg .cb,.ot,.bacard .bae i,.orb,
+.pimg2,.gimg,.stile,.stile.t-food{background:var(--matte-mint) !important;}
+.pimg2.t-med,.gimg.t-med,.stile.t-med,.ot.t-med,.cg:nth-child(even) .cb,.promo,.banner{background:#F1F4E4 !important;}
+.pimg2.t-home,.gimg.t-home,.stile.t-home{background:#E3F0EE !important;}
+.pimg2.t-other,.gimg.t-other,.stile.t-other{background:#EDF2E8 !important;}
+.pcard .stepper{background:var(--matte-green) !important;}
+.foot,.rvfoot{background:linear-gradient(to top,var(--matte-bg) 72%,rgba(233,242,235,0)) !important;}
+/* Schatten: nur noch weich und flach, keine Innen-Glanzkanten */
+.btn,.hb.primary,.chatform button,.mic,.go,.tile,.chip .box,.stepper,.opt,.cg .cb,.promo,.banner,.ci,.pc .pimg,.ot,.stile,
+.seg button.on,.seg2 button.on,.me .avatar,.home-pin,.toast,.cr,.rail,.oh,.rq,.step.done .dot,.tile .ic,.thumb{
+  box-shadow:var(--sh) !important;}
+.btn,.hb.primary{border:none !important;}
+.glass,.tile,.chip .box,.cg .cb,.opt,.rail,.oh,.rq,.promo{border:1px solid var(--hair) !important;}
+.tile.peach{border:none !important;}
+.orb{box-shadow:none !important;}
+/* Rest-Glanz: Innenkanten, Leucht-Blobs, Verlaufsringe */
+.psearch,.gimg,.tabs{box-shadow:none !important;}
+.blob{display:none !important;}
+.ring{background:rgba(140,190,160,.10) !important;}
+/* v6 – Feinschliff. Rückgängig: ab hier bis Blockende löschen. */
+/* Tab-Leiste: deckend (ohne Blur schien Inhalt durch), aktiver Tab mit Pille */
+.tabs{background:#FAFCFB !important;border-top:1px solid var(--hair) !important;padding-top:7px !important;padding-bottom:7px !important;}
+.tab svg{box-sizing:content-box;padding:3px 18px;border-radius:999px;transition:background .18s;}
+.tab.on svg{background:var(--matte-mint);}
+.tab.on{color:var(--matte-green) !important;}
+[id^="s-"]:not(.hidden){animation:scr .22s ease-out;}
+@keyframes scr{from{opacity:0;transform:translateY(6px);}}
+/* v7 – Stil nach Vorbild Wise, matt: weisser Grund, flache graue Karten, Waldgruen + helles Gruen, Pillen-Buttons.
+   Rueckgaengig: diesen v7-Abschnitt loeschen. */
+:root{--matte-bg:#FFFFFF;--matte-green:#163300;--matte-mint:#E2F6D5;--wz-lime:#9FE870;--wz-card:#F3F5F0;
+  --ink:#0E0F0C;--mute:#454745;--hair:rgba(14,15,12,.10);--sage2:#163300;--sage3:#163300;--emerald:#163300;--forest:#163300;--sh:none;}
+.app{background:#fff !important;box-shadow:none !important;}
+@media (min-width:700px){html,body{background:#EDEFEB !important;}}
+/* Karten: flach, grau, ohne Rand und Schatten */
+.glass,.rq,.oh,.ci,.tile.mint,.opt,.rail,.chip .box,.stepper,.psearch,.promo,.banner{background:var(--wz-card) !important;border:none !important;box-shadow:none !important;}
+.tile,.btn,.go,.toast,.thumb{box-shadow:none !important;}
+/* Hauptaktion: helles Gruen mit dunkler Schrift, Pillenform */
+.btn,.hb.primary,.go,.peach .go,.tile.peach .go,.mint .go,.tile.mint .go{background:var(--wz-lime) !important;color:#163300 !important;}
+.btn,.hb.primary{border-radius:999px !important;font-weight:600 !important;}
+.btn svg,.go svg{stroke:#163300 !important;}
+.tile.peach,.cr{background:#163300 !important;}
+.foot,.rvfoot{background:linear-gradient(to top,#fff 72%,rgba(255,255,255,0)) !important;}
+.tabs{background:#fff !important;}
+.display,#s-home .display{font-weight:800 !important;letter-spacing:-.035em !important;}
+/* v8 – Startseite im Liefer-App-Aufbau: Adresse oben, Suche, Kategorien, Bild-Banner, laufende Anfrage */
+#s-home .home-top{gap:10px;margin-bottom:12px;}
+.haddr{display:flex;align-items:center;gap:10px;min-width:0;flex:1;text-align:left;min-height:48px;}
+.haddr>svg{flex:none;width:24px;height:24px;stroke:var(--ink);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+.haddr>svg.r{width:18px;height:18px;}
+.haddr span{min-width:0;} .haddr small{display:block;font-size:.74rem;color:var(--mute);}
+.haddr b{display:block;font-weight:700;font-size:1rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.hsearch{display:flex;align-items:center;gap:10px;flex:none;width:100%;min-height:52px;padding:0 18px;border-radius:999px;background:var(--wz-card);color:var(--mute);font-size:1rem;text-align:left;}
+.hsearch svg{flex:none;width:22px;height:22px;stroke:var(--ink);fill:none;stroke-width:1.8;stroke-linecap:round;}
+.hcats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px;flex:none;}
+.hcats button{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:.76rem;font-weight:600;line-height:1.15;text-align:center;}
+.hcats .hc-i{display:grid;place-items:center;width:100%;aspect-ratio:1;border-radius:20px;background:var(--matte-mint);}
+.hcats .hc-i.t-med{background:#F1F4E4;} .hcats .hc-i.t-home{background:#E3F0EE;} .hcats .hc-i.t-other{background:var(--wz-card);}
+.hcats .hc-i svg{width:56%;height:56%;}
+.hcats button:active .hc-i{transform:scale(.95);}
+#s-home .herophoto{flex:none !important;height:170px !important;min-height:0 !important;margin:16px 0 0 !important;border-radius:24px;-webkit-mask-image:none !important;mask-image:none !important;}
+#s-home .herophoto .dots{top:14px;right:14px;}
+/* flaches Band statt Verlauf, damit der Text auf dem Foto lesbar bleibt */
+.hcap{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:10px 16px 12px;background:rgba(14,15,12,.6);}
+#s-home .hcap .display{font-size:1.1rem !important;line-height:1.2 !important;color:#fff !important;font-weight:700 !important;letter-spacing:-.01em !important;}
+#s-home .hcap .lead{margin-top:2px !important;font-size:.8rem;line-height:1.3;color:rgba(255,255,255,.9) !important;}
+#s-home .gl2{margin-top:18px;}
+#s-home .tiles{margin-top:6px !important;}
+body.role-helper #s-home .rcv,body.role-guardian #s-home .rcv{display:none !important;}
+/* v9 – Startseite passt auf einen Bildschirm: kleinere runde Kategorie-Symbole, zwei kompakte Aktionskarten, Banner füllt den Rest */
+.hcats{gap:6px;margin-top:12px;}
+.hcats .hc-i{width:58px;border-radius:50%;}
+.hcats .hc-i svg{width:30px;height:30px;}
+.hcats button{font-size:.74rem;font-weight:500;gap:5px;}
+#s-home{padding-bottom:calc(88px + env(safe-area-inset-bottom)) !important;}
+body:not(.role-helper):not(.role-guardian) #s-home .herophoto{flex:1 1 0 !important;height:auto !important;min-height:96px !important;max-height:220px;margin-top:12px !important;}
+#s-home .rcv .gl2{display:none;}
+#s-home .rcv .rq{margin:10px 0 0;}
+#s-home .tiles{margin-top:10px !important;gap:10px;}
+#s-home .tiles .tile{display:grid !important;grid-template-columns:auto 1fr auto;align-items:center;column-gap:10px;min-height:64px !important;height:auto !important;aspect-ratio:auto !important;padding:10px 12px !important;border-radius:20px !important;text-align:left;}
+#s-home .tiles .tile>span{display:none !important;}
+#s-home .tiles .tile b{font-size:.9rem !important;line-height:1.15 !important;margin:0 !important;overflow-wrap:anywhere;}
+#s-home .tiles .tile .ic{position:static !important;margin:0 !important;width:28px !important;height:28px !important;background:none !important;box-shadow:none !important;}
+#s-home .tiles .tile .ic svg{width:26px !important;height:26px !important;}
+#s-home .tiles .tile .go{position:static !important;width:30px !important;height:30px !important;margin:0 !important;}
+#s-home .tiles .tile .go svg{width:16px !important;height:16px !important;}
+/* v10 – freier Platz wird nach Bildschirmhöhe verteilt: --e = Höhe über dem ~699px-Grundlayout.
+   Aktionskarten, Kategorie-Symbole und Abstände wachsen anteilig mit, das Banner nimmt den Rest. */
+#s-home{--e:max(0px,100dvh - 699px);}
+#s-home .hcats{margin-top:calc(12px + var(--e)*.03);}
+#s-home .hcats .hc-i{width:min(76px,calc(58px + var(--e)*.1));}
+#s-home .hcats .hc-i svg{width:52%;height:52%;}
+body:not(.role-helper):not(.role-guardian) #s-home .herophoto{margin-top:calc(12px + var(--e)*.03) !important;max-height:420px;}
+#s-home .rcv .rq{margin-top:calc(10px + var(--e)*.03);}
+#s-home .tiles{margin-top:calc(10px + var(--e)*.03) !important;}
+#s-home .tiles .tile{min-height:min(116px,calc(64px + var(--e)*.4)) !important;}
+@media (min-height:820px){ /* genug Höhe: Symbol und Pfeil oben, Titel darunter */
+  #s-home .tiles .tile{grid-template-columns:1fr auto;grid-template-rows:auto 1fr;align-items:start;row-gap:6px;padding:12px 14px !important;}
+  #s-home .tiles .tile .ic{grid-area:1/1;}
+  #s-home .tiles .tile .go{grid-area:1/2;}
+  #s-home .tiles .tile b{grid-area:2/1/3/-1;align-self:end;font-size:1rem !important;}
+}
+/* Farbpaar der Aktionskarten: bisheriges Kartenweiß + Wise-Hellgrün, dunkelgrüner Pfeilknopf auf beiden */
+#s-home .tiles .tile.mint{background:var(--wz-card) !important;}
+#s-home .tiles .tile.peach{background:var(--wz-lime) !important;}
+#s-home .tiles .tile b{color:#163300 !important;}
+#s-home .tiles .tile .ic svg{stroke:#163300 !important;}
+#s-home .tiles .tile .go{background:#163300 !important;}
+#s-home .tiles .tile .go svg{stroke:var(--wz-lime) !important;}
+#s-home .tiles .tile.mint .go{background:var(--wz-lime) !important;}
+#s-home .tiles .tile.mint .go svg{stroke:#163300 !important;}
+#s-home .tiles .tile .ic svg{stroke-width:1.8;}@media (min-height:820px){
+  #s-home .tiles .tile .ic{width:34px !important;height:34px !important;}
+  #s-home .tiles .tile .ic svg{width:34px !important;height:34px !important;}
+}

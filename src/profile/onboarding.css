@@ -1,0 +1,15 @@
+/* ===== Begrüßung: Rolle wählen (erster Start) ===== */
+#onboard{position:fixed;inset:0;z-index:60;overflow-y:auto;background:var(--bg);}
+#onboard .ob{max-width:440px;margin:0 auto;min-height:100dvh;display:flex;flex-direction:column;gap:18px;padding:max(18px,env(safe-area-inset-top)) 20px calc(24px + env(safe-area-inset-bottom));
+  background:radial-gradient(120% 60% at 100% 0%,rgba(246,216,196,.55),transparent 60%),radial-gradient(120% 60% at 0% 45%,rgba(200,226,210,.6),transparent 60%);}
+#onboard .ob-top{display:flex;align-items:center;justify-content:space-between;}
+#onboard .ob-lang{display:flex;gap:4px;padding:4px;border-radius:999px;background:rgba(255,255,255,.75);border:1px solid var(--line);}
+#onboard .ob-lang button{min-height:36px;min-width:44px;padding:0 10px;border-radius:999px;font-size:.85rem;font-weight:600;color:#3B464C;}
+#onboard .ob-lang button.on{background:#1F7A59;color:#fff;}
+#onboard .ob-logo{display:block;height:auto;width:min(78%,300px);margin:28px auto 4px;}
+#onboard h1{font-weight:300;font-size:2rem;line-height:1.12;letter-spacing:-.02em;text-align:center;}
+#onboard .ob-sub{color:var(--mute);text-align:center;font-size:1rem;line-height:1.45;margin-top:-6px;}
+#onboard .ob-go{min-height:56px;border-radius:16px;font-weight:600;font-size:1.05rem;color:#fff;background:#1F7A59;margin-top:auto;}
+#onboard .ob-go:disabled{background:rgba(31,122,89,.3);cursor:not-allowed;}
+#onboard .ob-note{text-align:center;font-size:.85rem;color:var(--mute);}
+html.ob-open,body.ob-open{overflow:hidden !important;}
